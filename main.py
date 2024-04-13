@@ -16,6 +16,8 @@ while True:
     dr.get(url)
     dr.find_element(By.CSS_SELECTOR, 'button[class="overflow--wrap-on flex--grow-1 flex--fromW3-grow-0 width--fromW3-ctrl-m space--mb-3 space--fromW3-mb-0 space--fromW3-mr-2 button button--shape-circle button--type-primary button--mode-brand"]').click()
     time.sleep(2)
+    dr.find_element(By.CSS_SELECTOR, 'button[class="space--h-1 comments-pagi-page"]').click()
+    time.sleep(2)
     soup = BeautifulSoup(dr.page_source, 'html.parser')
     page_text = soup.get_text()
 
