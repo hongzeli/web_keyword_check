@@ -15,9 +15,9 @@ while True:
     dr.implicitly_wait(10)
     dr.get(url)
     dr.find_element(By.CSS_SELECTOR, 'button[class="overflow--wrap-on flex--grow-1 flex--fromW3-grow-0 width--fromW3-ctrl-m space--mb-3 space--fromW3-mb-0 space--fromW3-mr-2 button button--shape-circle button--type-primary button--mode-brand"]').click()
-    time.sleep(2)
-    dr.find_element(By.CSS_SELECTOR, 'button[class="space--h-1 comments-pagi-page"]').click()
-    time.sleep(2)
+    time.sleep(1)
+    dr.find_element(By.CSS_SELECTOR, 'button[aria-label="Letzte Seite"]').click()
+    time.sleep(6)
     soup = BeautifulSoup(dr.page_source, 'html.parser')
     page_text = soup.get_text()
 
@@ -25,7 +25,7 @@ while True:
     for word in search_words:
         if word in page_text:
             # check if the word is already found and email sent
-            word_area = page_text[page_text.find(word)-100:page_text.find(word)+100]
+            word_area = page_text[page_text.find(word):page_text.find(word)+len(word)+25]
             if word_area not in last_found_list:
                 last_found_list.append(word_area)
             else:
@@ -35,7 +35,7 @@ while True:
             sender_email = 'sender@outlook.com'             # todo: need to change, sender email, must be outlook
             recipient_email = 'recipient_email@xxx.com'     # todo: need to change, recipient email
             subject = 'Keyword Found in Page'               # todo: need to change, email title
-            message = 'Keyword Found in Page'               # todo: need to change, email message
+            message = page_text[page_text.find(word)-50:page_text.find(word)+len(word)+50]              # todo: need to change, email message
             smtp_server = 'smtp-mail.outlook.com'
             smtp_port = 587
             smtp_username = 'ender@outlook.com'             # todo: need to change, sender email username
