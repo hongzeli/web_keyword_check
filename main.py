@@ -21,6 +21,7 @@ while True:
         time.sleep(6)
         soup = BeautifulSoup(dr.page_source, 'html.parser')
         page_text = soup.get_text()
+        dr.quit()
     
         search_words = ['Amex', "American"]  # todo: need to change, search words
         for word in search_words:
@@ -53,5 +54,5 @@ while True:
                 server.quit()
     except:
         print("An exception occurred, retry...")
-
+    
     time.sleep(60*5)  # todo: need to change, currently it will run every 5 minutes
